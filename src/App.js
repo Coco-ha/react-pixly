@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import axios from "axios"
 
 function App() {
+
+  const [formData, setFormData]= useState({
+    fileInput: ""
+  })
+
+
+  function handleChange(evt){
+    const {fileInput, value} = evt.target
+    setFormData({
+      ...formData,
+      [fileInput]:value
+    })
+  }
+
+  async function handleSubmit(evt){
+    evt.preventDefault();
+    console.log("formData>>>>>>>>", formData)
+    await axios.post("http://localhost:5001/add", formData, {
+      headers:{
+        "Content-Type": "multipart/form-data",
+      }
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <form onSubmit={handleSubmit} enctype="multipart/form-data" >
+      <label htmlFor='fileInput'> File Input </label>
+      <input
+        type="file"
+        fileInput = "fileInput"
+        onChange={handleChange}
+      />
+    <button type="submit">Submit</button>
+    </form>
+  )
 }
 
 export default App;
