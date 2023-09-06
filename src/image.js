@@ -1,30 +1,27 @@
  import EXIF from 'exif-js'
 
- function getMetaData(evt){
+ /** Pulls relevant metadata from an image on load
+  *
+  * Returns {Date, PixelXDimension,PixelYDimension, Make, Model}
+  */
+ function getMetaData(fileInput){
+    console.log("running getMetaData with", fileInput)
 
-    EXIF.getData(evt.target, function(){
+    EXIF.getData(fileInput, function(){
 
-      const allMetaData = EXIF.getAllTags(this)
       const specificMetaData = {
+        Date: EXIF.getTag(this, "Date"),
+        PixelXDimension: EXIF.getTag(this, "PixelXDimension"),
+        PixelYDimension: EXIF.getTag(this, "PixelYDimension"),
+        Make: EXIF.getTag(this, "Make"),
         Model: EXIF.getTag(this, "Model"),
-        AperatureValue:EXIF.getTag(this, "AperatureValue")
       }
 
-      console.log("allMetaData",allMetaData)
       console.log("specific meta data", specificMetaData)
+      return specificMetaData
+
     })
   }
 
-
-// function getExif() {
-//   var img1 = document.getElementById("img1");
-//   EXIF.getData(img1, function() {
-//       var make = EXIF.getTag(this, "Make");
-//       var model = EXIF.getTag(this, "Model");
-//       var makeAndModel = document.getElementById("makeAndModel");
-//       makeAndModel.innerHTML = `${make} ${model}`;
-//   });
-
-  //image.onload
 
   export default getMetaData

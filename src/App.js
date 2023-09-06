@@ -2,32 +2,51 @@ import { useState } from 'react';
 import axios from "axios";
 import getMetaData from './image';
 
+const BASE_API_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5001";
+
+
 function App() {
 
-  const [file, setFile] = useState();
+  const [fileData, setFileData] = useState({});
   const [imageInput, setImageInput] = useState("");
-  const [mode,setMode] = useState("get image")
+  const [mode, setMode] = useState("get image");
 
   function handleChange(evt) {
     setImageInput(evt.target.value);
-    setFile(evt.target.files[0]);
+    console.log("handling form change", evt.target.files[0])
+    setFileData(() => {
+      return { ...fileData, file: evt.target.files[0] };
+    });
   }
 
- async function showPreview() {
-  setMode("preview")
- }
+
+  async function getMetaDataAndPreview() {
+    setMode("preview")
+    console.log("running show preview")
+
+    setMode("preview");
+    const input = document.querySelector(".GetImageForm-imageInput");
+    console.log("input element:", input)
+    const metadata = getMetaData(input);
+
+    setFileData(() => {
+      return {
+        ...fileData,
+        ...metadata,
+      };
+    });
+  }
 
 
-  async function handleSubmit(evt) {
+  async function handleUpload(evt) {
     evt.preventDefault();
+    console.log("running handle upload")
+    // const formData = {
+    //   file: fileData.file,
+    //   fileName: fileData.file.name
+    // };
 
-    const formData = {
-      file:file,
-      fileName:file.name
-    }
-
-    console.log("formData>>>>>>>>", file);
-    await axios.post("http://localhost:5001/add", formData, {
+    await axios.post(`${BASE_API_URL}/add`, fileData, {
       headers: {
         "Content-Type": "multipart/form-data",
       }
@@ -38,23 +57,27 @@ function App() {
   return (
 
     mode === "get image" ?
-    (<form onSubmit={showPreview} >
-      <label htmlFor='image'> File Input </label>
-      <input
-        value={imageInput}
-        type="file"
-        name="image"
-        onChange={handleChange}
-      />
-      <button type="submit">Submit</button>
-    </form>) :
+      (<form onSubmit={getMetaDataAndPreview} className='GetImageForm'>
+        <label htmlFor='image'> File Input </label>
+        <input
+          value={imageInput}
+          type="file"
+          name="image"
+          className="GetImageForm-imageInput"
+          onChange={handleChange}
+        />
+        <button type="submit">Submit</button>
+      </form>) :
 
-    <div>
-      <img src={URL.createObjectURL(file)} onLoad={getMetaData}/>
-    <form onSubmit={handleSubmit}>
-      <button type="submit">Submit</button>
-    </form>
-    </div>
+      <div>
+        <img
+          src={URL.createObjectURL(fileData.file)}
+          alt={fileData.file.name}
+          className="EditImageForm-image" />
+        <form onSubmit={handleUpload}>
+          <button type="submit">Save</button>
+        </form>
+      </div>
 
   );
 }
