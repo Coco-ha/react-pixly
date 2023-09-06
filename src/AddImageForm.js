@@ -36,7 +36,7 @@ function AddImageForm({addImage}) {
 
     const input = document.querySelector(".AddImageForm-imageInput");
     const metadata = getMetaData(input);
-
+    console.log("metadata>>>>", metadata)
     setFileData(() => {
       return {
         ...fileData,
@@ -52,6 +52,7 @@ function AddImageForm({addImage}) {
   async function handleUpload(evt) {
     evt.preventDefault();
     console.log("running handle upload")
+    console.log("fileDATA>>>>", fileData)
     await uploadImage(fileData)
     //TODO: redirect somewhere
   }
