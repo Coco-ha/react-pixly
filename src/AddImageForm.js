@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import getMetaData from './image';
 import { uploadImage } from './api';
-
+import ImagePreview from './ImagePreview';
 
 /**  Renders a form that allows a user to add an image to pixly:
  *
@@ -20,6 +20,8 @@ function AddImageForm({addImage}) {
   const [imageInput, setImageInput] = useState("");
   const [mode, setMode] = useState("select");
 
+  console.log("rendering addImageForm with:",fileData);
+
   /** Handles form controls */
   function handleChange(evt) {
     setImageInput(evt.target.value);
@@ -31,22 +33,34 @@ function AddImageForm({addImage}) {
   /** Accesses the file from the form input and updates fileData state.
    * Advances to preview mode.
   */
-  async function getMetaDataAndPreview(evt) {
+  async function goPreviewMode(evt) {
     evt.preventDefault()
 
-    const input = document.querySelector(".AddImageForm-imageInput");
-    const metadata = getMetaData(input);
-    console.log("metadata>>>>", metadata)
-    setFileData(() => {
-      return {
-        ...fileData,
-        ...metadata,
-      };
-    });
+    // const input = document.querySelector(".AddImageForm-imageInput");
+    // const metadata = getMetaData(input);
+    // console.log("metadata>>>>", metadata) //undefined
+    // setFileData(() => {
+    //   return {
+    //     ...fileData,
+    //     ...metadata,
+    //   };
+    // });
 
     setMode("preview")
   }
 
+  /** Updates the fileData state with metadata from an image.  Used as
+   * a callback
+   */
+  function updateMetadata(data){
+    console.log("passed data to updateMetadata", data)
+    setFileData(() => {
+      return {
+        ...fileData,
+        ...data,
+      };
+    })
+  }
 
   /** Makes an api request for uploading an image */
   async function handleUpload(evt) {
@@ -62,7 +76,7 @@ function AddImageForm({addImage}) {
     <div className='AddImageForm'>
     {mode === "select"
       ?
-        <form onSubmit={getMetaDataAndPreview}>
+        <form onSubmit={goPreviewMode}>
           <label htmlFor='image'> File Input </label>
           <input
             value={imageInput}
@@ -74,15 +88,10 @@ function AddImageForm({addImage}) {
           <button type="submit">Submit</button>
         </form>
       :
-        <div>
-          <img
-            src={URL.createObjectURL(fileData.file)}
-            alt={fileData.file.name}
-            className="EditImageForm-image" />
-          <form onSubmit={handleUpload}>
-            <button type="submit">Save</button>
-          </form>
-        </div>
+        <ImagePreview
+          updateMetadata={updateMetadata}
+          file={fileData.file}
+          save={handleUpload}/>
       }
       </div>
   );

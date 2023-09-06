@@ -4,44 +4,43 @@ import EXIF from 'exif-js';
  *
  * Returns {Date, PixelXDimension,PixelYDimension, Make, Model}
  */
-//  function getMetaData(fileInput){
-//     console.log("running getMetaData with", fileInput)
-//     let specificDataResult;
-//     EXIF.getData(fileInput, function(){
-//       console.log("inside exif get data")
-//       const specificMetaData = {
-//         date: EXIF.getTag(this, "Date"),
-//         pixelXDimension: EXIF.getTag(this, "PixelXDimension"),
-//         pixelYDimension: EXIF.getTag(this, "PixelYDimension"),
-//         make: EXIF.getTag(this, "Make"),
-//         model: EXIF.getTag(this, "Model"),
-//       }
 
-//       console.log("specificmetadata>>>>", specificMetaData)
+ function getMetaData(fileInput, onResolved){
+    console.log("running getMetaData with", fileInput)
+
+    EXIF.getData(fileInput, function(){
+      console.log("inside exif get data")
+      const specificMetaData = {
+        date: EXIF.getTag(this, "Date"),
+        pixelXDimension: EXIF.getTag(this, "PixelXDimension"),
+        pixelYDimension: EXIF.getTag(this, "PixelYDimension"),
+        make: EXIF.getTag(this, "Make"),
+        model: EXIF.getTag(this, "Model"),
+      }
+
+      console.log("specificmetadata>>>>", specificMetaData)
+      onResolved(specificMetaData)
+    })
 
 
-//       specificDataResult=specificMetaData
-//     })
-//     return specificDataResult
-
-//   }
-
+  }
 
 
 
-function getMetaData(fileInput) {
-  console.log("running getMetaData with", fileInput);
-  return new Promise(function (resolve, reject) {
-    const specificMetaData = {
-      date: EXIF.getTag(this, "Date"),
-      pixelXDimension: EXIF.getTag(this, "PixelXDimension"),
-      pixelYDimension: EXIF.getTag(this, "PixelYDimension"),
-      make: EXIF.getTag(this, "Make"),
-      model: EXIF.getTag(this, "Model")
-    };
-    resolve(specificMetaData);
-  });
 
-}
+// async function getMetaData(fileInput) {
+//   console.log("running getMetaData with", fileInput);
+//   return new Promise(function (resolve, reject) {
+//     const specificMetaData = {
+//       date: EXIF.getTag(this, "Date"),
+//       pixelXDimension: EXIF.getTag(this, "PixelXDimension"),
+//       pixelYDimension: EXIF.getTag(this, "PixelYDimension"),
+//       make: EXIF.getTag(this, "Make"),
+//       model: EXIF.getTag(this, "Model")
+//     };
+//     resolve(specificMetaData);
+//   });
+
+// }
 
 export default getMetaData;
