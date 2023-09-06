@@ -1,42 +1,45 @@
 import { useState } from 'react';
-import axios from "axios"
+import axios from "axios";
 
 function App() {
 
-  const [formData, setFormData]= useState({
-    fileInput: ""
-  })
+  const [file, setFile] = useState();
+  const [imageInput, setImageInput] = useState("");
 
-
-  function handleChange(evt){
-    const {fileInput, value} = evt.target
-    setFormData({
-      ...formData,
-      [fileInput]:value
-    })
+  function handleChange(evt) {
+    setImageInput(evt.target.value);
+    setFile(evt.target.files[0]);
   }
 
-  async function handleSubmit(evt){
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    console.log("formData>>>>>>>>", formData)
-    await axios.post("http://localhost:5001/add", formData, {
-      headers:{
+
+    const formData = {
+      file:file,
+      fileName:file.name
+    }
+    
+    console.log("formData>>>>>>>>", file);
+    await axios.post("http://localhost:5000/add", formData, {
+      headers: {
         "Content-Type": "multipart/form-data",
       }
-    })
+    });
+    console.log("success");
   }
 
   return (
-    <form onSubmit={handleSubmit} enctype="multipart/form-data" >
-      <label htmlFor='fileInput'> File Input </label>
+    <form onSubmit={handleSubmit} >
+      <label htmlFor='image'> File Input </label>
       <input
+        value={imageInput}
         type="file"
-        fileInput = "fileInput"
+        name="image"
         onChange={handleChange}
       />
-    <button type="submit">Submit</button>
+      <button type="submit">Submit</button>
     </form>
-  )
+  );
 }
 
 export default App;
