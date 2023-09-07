@@ -35,17 +35,6 @@ function AddImageForm({addImage}) {
   */
   async function goPreviewMode(evt) {
     evt.preventDefault()
-
-    // const input = document.querySelector(".AddImageForm-imageInput");
-    // const metadata = getMetaData(input);
-    // console.log("metadata>>>>", metadata) //undefined
-    // setFileData(() => {
-    //   return {
-    //     ...fileData,
-    //     ...metadata,
-    //   };
-    // });
-
     setMode("preview")
   }
 

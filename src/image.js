@@ -26,21 +26,4 @@ import EXIF from 'exif-js';
   }
 
 
-
-
-// async function getMetaData(fileInput) {
-//   console.log("running getMetaData with", fileInput);
-//   return new Promise(function (resolve, reject) {
-//     const specificMetaData = {
-//       date: EXIF.getTag(this, "Date"),
-//       pixelXDimension: EXIF.getTag(this, "PixelXDimension"),
-//       pixelYDimension: EXIF.getTag(this, "PixelYDimension"),
-//       make: EXIF.getTag(this, "Make"),
-//       model: EXIF.getTag(this, "Model")
-//     };
-//     resolve(specificMetaData);
-//   });
-
-// }
-
 export default getMetaData;
