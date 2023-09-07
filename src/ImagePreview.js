@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import getMetaData from './image';
+import getMetaData from './image_helpers';
 import { uploadImage } from './api';
 
 

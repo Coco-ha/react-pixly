@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import getMetaData from './image';
+import getMetaData from './image_helpers';
 import { uploadImage } from './api';
 import ImagePreview from './ImagePreview';
 
