@@ -5,12 +5,13 @@ import { getImageById } from "./api";
 function ImageCard({images}) {
 
   console.log("Rendering image card. Images>>>>", images)
-  const [id] = useParams;
-
-  const image = images.filter(image=> id===image.id)[0]
+  const {id} = useParams();
+  console.log("id>>>>>>",id)
+  const image = images.find(image=> image.id===id)
+  console.log("image>>>>", image)
 
   return (
-    <div>
+    <div className="ImageCard">
       <Image image={image} />
     </div>
   );

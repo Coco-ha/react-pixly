@@ -8,7 +8,7 @@ import RoutesList from './RoutesList';
 
 // Renders the app
 function App() {
-
+  const[isLoading, setIsLoading] = useState(true)
   const [images, setImages] = useState([]);
   console.log("App rendered. Images:", images);
 
@@ -16,7 +16,8 @@ function App() {
   useEffect(function fetchAllImagesOnMount() {
     async function fetchAllImages() {
       const response = await getAllImages();
-      setImages(() => [...images, response.images]);
+      setImages(() => [...images, ...response.images]);
+      setIsLoading(false)
     }
 
     fetchAllImages();
@@ -30,7 +31,10 @@ function App() {
     addNewImage();
   }
 
-
+  if(isLoading) {
+    return <h3> is Loading...</h3>
+  }
+  
   return (
     <BrowserRouter>
       <RoutesList images={images}/>
