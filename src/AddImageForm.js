@@ -2,6 +2,7 @@ import { useState } from 'react';
 import getMetaData from './image_helpers';
 import { uploadImage } from './api';
 import ImagePreview from './ImagePreview';
+import { useNavigate } from 'react-router-dom';
 import "./AddImageForm.css"
 
 /**  Renders a form that allows a user to add an image to pixly:
@@ -10,7 +11,7 @@ import "./AddImageForm.css"
  *  fileData: the user file and associated metadata
  *            {file, Date, PixelXDimension,PixelYDimension, Make, Model}
  *  imageInput: form control for the file input
- *  mode: one of "select" or "preview"
+ *  mode: one of "select", "preview" or "complete"
  *
  * PROPS:
  *  addImage: callback function for updating app state
@@ -20,6 +21,7 @@ function AddImageForm({ addImage }) {
   const [fileData, setFileData] = useState({});
   const [imageInput, setImageInput] = useState("");
   const [mode, setMode] = useState("select");
+  const navigate = useNavigate();
 
   console.log("rendering addImageForm with:", fileData);
 
@@ -69,7 +71,10 @@ function AddImageForm({ addImage }) {
 
     console.log("running handle upload");
     console.log("fileDATA>>>>", fileData);
+    //create id
+    //add id to fileData
     await uploadImage(fileData);
+    navigate("/")
     //TODO: redirect somewhere
 
   }

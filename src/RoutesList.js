@@ -1,15 +1,16 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import AddImageForm from "./AddImageForm";
 import Home from "./Home";
-import ImageCard from "./ImageCard";
+import ImagesList from "./ImagesList";
+import ImageDetails from "./ImageDetails";
 
-function RoutesList({images}){
+function RoutesList({images, addImage}){
 
   return(
     <Routes>
-      <Route path="/" element={<Home/>} />
-      <Route path="/add" element={<AddImageForm/>} />
-      <Route path="/images/:id" element={<ImageCard images={images}/>} />
+      <Route path="/" element={<Home images={images}/>} />
+      <Route path="/add" element={<AddImageForm addImage={addImage}/>} />
+      <Route path="/images/:id" element={<ImageDetails images={images}/>} />
     </Routes>
   )
 

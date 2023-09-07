@@ -8,6 +8,7 @@ const BASE_API_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5001";
 async function uploadImage(data) {
   console.log("data>>>>>>>", data);
   const formData = new FormData();
+  formData.set("id", data.id);
   formData.set("file", data.file);
   formData.set("make", data.make);
   formData.set("pixelXDimension", data.pixelXDimension);

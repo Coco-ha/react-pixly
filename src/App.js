@@ -4,6 +4,7 @@ import { uploadImage, getAllImages } from './api';
 import AddImageForm from './AddImageForm';
 import { BrowserRouter } from 'react-router-dom';
 import RoutesList from './RoutesList';
+import NavBar from './NavBar';
 import "./App.css"
 
 // Renders the app
@@ -31,6 +32,9 @@ function App() {
     addNewImage();
   }
 
+  function addImage(image){
+    setImages(()=>[image,...images])
+  }
 
 
   return (
@@ -41,7 +45,8 @@ function App() {
           <h3> is Loading...</h3>
           :
           <BrowserRouter>
-            <RoutesList images={images}/>
+            <NavBar/>
+            <RoutesList images={images} addImage={addImage}/>
             {/* <AddImageForm addImage={addImage} /> */}
           </BrowserRouter>
         }

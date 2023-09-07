@@ -1,4 +1,6 @@
 import EXIF from 'exif-js';
+import {v4 as uuidv4} from "uuid";
+
 
 /** Pulls relevant metadata from an image on load
  *
@@ -11,6 +13,7 @@ import EXIF from 'exif-js';
     EXIF.getData(fileInput, function(){
       console.log("inside exif get data")
       const specificMetaData = {
+        id: uuidv4(),
         date: EXIF.getTag(this, "Date"),
         pixelXDimension: EXIF.getTag(this, "PixelXDimension"),
         pixelYDimension: EXIF.getTag(this, "PixelYDimension"),

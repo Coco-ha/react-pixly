@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import getMetaData from './image_helpers';
 import { uploadImage } from './api';
+import "./ImagePreview.css";
 
 
 function ImagePreview({ file, updateMetadata, save }) {//need this prop?
@@ -13,14 +14,12 @@ function ImagePreview({ file, updateMetadata, save }) {//need this prop?
   function handleLoad(evt) {
     if (isLoading) {
       const dataFromImage = getMetaData(evt.target, updateMetadata);
-      // console.log("metadata from HandleLoad:", dataFromImage);
-      // updateMetadata(dataFromImage);
       setIsLoading(false);
     }
   }
 
   return (
-    <div>
+    <div className='EditImageForm'>
       <img
         src={URL.createObjectURL(file)}
         alt={file.name}
