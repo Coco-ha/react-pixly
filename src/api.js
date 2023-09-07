@@ -10,11 +10,13 @@ async function uploadImage(data) {
   const formData = new FormData();
   formData.set("id", data.id);
   formData.set("file", data.file);
-  formData.set("make", data.make);
-  formData.set("pixelXDimension", data.pixelXDimension);
-  formData.set("pixelYDimension", data.pixelYDimension);
-  formData.set("model", data.model);
-  formData.set("date", data.date);
+  formData.set("file_name", data.file.name);
+  if (data.make) formData.set("make", data.make);
+  if (data.pixelXDimension) formData.set("pixelXDimension", data.pixelXDimension);
+  if (data.pixelYDimension) formData.set("pixelYDimension", data.pixelYDimension);
+  if (data.model) formData.set("model", data.model);
+  if (data.date) formData.set("date", data.date);
+  // if (data.url) formData.set("url", data.url)
 
   await axios.post(`${BASE_API_URL}/add`, formData, {
     headers: {

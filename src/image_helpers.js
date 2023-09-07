@@ -19,6 +19,7 @@ import {v4 as uuidv4} from "uuid";
         pixelYDimension: EXIF.getTag(this, "PixelYDimension"),
         make: EXIF.getTag(this, "Make"),
         model: EXIF.getTag(this, "Model"),
+        url: EXIF.getTag(this, "url")
       }
 
       console.log("specificmetadata>>>>", specificMetaData)

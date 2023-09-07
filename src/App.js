@@ -9,6 +9,7 @@ import "./App.css"
 
 // Renders the app
 function App() {
+
   const[isLoading, setIsLoading] = useState(true)
   const [images, setImages] = useState([]);
   console.log("App rendered. Images:", images);

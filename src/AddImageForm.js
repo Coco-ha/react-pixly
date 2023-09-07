@@ -35,6 +35,7 @@ function AddImageForm({ addImage }) {
 
     if (extension === "jpg") {
       setImageInput(evt.target.value);
+
       setFileData(() => {
         return { ...fileData, file: evt.target.files[0] };
       });
@@ -50,6 +51,7 @@ function AddImageForm({ addImage }) {
   async function goPreviewMode(evt) {
     evt.preventDefault();
     setMode("preview");
+
   }
 
   /** Updates the fileData state with metadata from an image.  Used as
@@ -63,6 +65,7 @@ function AddImageForm({ addImage }) {
         ...data,
       };
     });
+
   }
 
   /** Makes an api request for uploading an image */
@@ -74,7 +77,8 @@ function AddImageForm({ addImage }) {
     //create id
     //add id to fileData
     await uploadImage(fileData);
-    navigate("/")
+    addImage(fileData)
+    navigate(`/images/${fileData.id}`)
     //TODO: redirect somewhere
 
   }
