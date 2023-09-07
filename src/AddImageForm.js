@@ -2,6 +2,7 @@ import { useState } from 'react';
 import getMetaData from './image_helpers';
 import { uploadImage } from './api';
 import ImagePreview from './ImagePreview';
+import "./AddImageForm.css"
 
 /**  Renders a form that allows a user to add an image to pixly:
  *
@@ -79,7 +80,7 @@ function AddImageForm({ addImage }) {
       {mode === "select"
         ?
         <form onSubmit={goPreviewMode}>
-          <label htmlFor='image'> File Input </label>
+          <label htmlFor='image'></label>
           <input
             value={imageInput}
             type="file"
@@ -87,7 +88,7 @@ function AddImageForm({ addImage }) {
             className="AddImageForm-imageInput"
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button className="AddImageForm-button" type="submit">Submit</button>
         </form>
         :
         <ImagePreview

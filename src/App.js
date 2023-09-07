@@ -4,7 +4,7 @@ import { uploadImage, getAllImages } from './api';
 import AddImageForm from './AddImageForm';
 import { BrowserRouter } from 'react-router-dom';
 import RoutesList from './RoutesList';
-
+import "./App.css"
 
 // Renders the app
 function App() {
@@ -31,15 +31,23 @@ function App() {
     addNewImage();
   }
 
-  if(isLoading) {
-    return <h3> is Loading...</h3>
-  }
-  
+
+
   return (
-    <BrowserRouter>
-      <RoutesList images={images}/>
-      {/* <AddImageForm addImage={addImage} /> */}
-    </BrowserRouter>
+    <section className='App'>
+      <div className='App-container'>
+
+        {isLoading ?
+          <h3> is Loading...</h3>
+          :
+          <BrowserRouter>
+            <RoutesList images={images}/>
+            {/* <AddImageForm addImage={addImage} /> */}
+          </BrowserRouter>
+        }
+
+      </div>
+    </section>
   );
 }
 

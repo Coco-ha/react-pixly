@@ -9,7 +9,7 @@ function RoutesList({images}){
     <Routes>
       <Route path="/" element={<Home/>} />
       <Route path="/add" element={<AddImageForm/>} />
-      <Route path="/image/:id" element={<ImageCard images={images}/>} />
+      <Route path="/images/:id" element={<ImageCard images={images}/>} />
     </Routes>
   )
 

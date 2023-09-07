@@ -1,0 +1,23 @@
+.AddImageForm-button,
+.AddImageForm input[type="file"]::file-selector-button {
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 3px;
+    padding:.5em;
+    color:white;
+}
+
+.AddImageForm input[type="file"]::file-selector-button {
+    margin-right: 2em;
+}
+
+
+.AddImageForm input[type="file"] {
+    padding:.5em;
+    border: 1px solid var(--highlight-color);
+    border-radius: 3px;
+    display: block;
+    margin:.5em;
+    margin-left:auto;
+    margin-right:auto;
+}
