@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getMetaData } from './image_helpers';
 import { uploadImage } from './api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import ImagePreview from './ImagePreview';
 
 /** Responsible for holding data about an image
@@ -13,44 +13,51 @@ import ImagePreview from './ImagePreview';
  *
  * State:
  * isLoading: boolean to indicate if the image is done loading
- * fileData: metaData from the image
+ * fileData: The image and its metaData (where available)
  *    {file, date, file_name ,make,model, pixel_x_dimension, pixel_y_dimension}
- *
  *
  * RouteList -> EditImageForm
  */
 function EditImageForm({ jpg, updateImagesState }) {
 
+  console.log("jpg", jpg)
+
   const [isLoading, setIsLoading] = useState(true);
   const [fileData, setFileData] = useState({});
-  // const [imageElement, setImageElement] = useState({});
   const navigate = useNavigate();
 
   console.log("EditImageForm fileData: ", fileData)
 
 
-
+  /** Updates the fileData state by pulling metadata from the image on load
+   *
+   */
   useEffect(function listenForImageLoad() {
 
     const img = document.querySelector("img");
-    if (!img) throw new Error("no image element found");
+    if (!img) {
+      navigate("/");
+      return;
+    }
 
     console.log("image element:", img);
     img.onload= () => {
-        if (isLoading) {
+        if (isLoading) { //Only the first time. Avoid infinite loops.
           function updateFileData(data) {
             setFileData(data)
           };
 
-          getMetaData(img, updateFileData)
+          getMetaData(img, updateFileData) //pull data and update state
           setIsLoading(false)
       };
-
     }
-
   }, [isLoading]);
 
-  /** Makes an api request for uploading an image */
+  /** Makes an api request for uploading an image then redirects to image
+   * details for that image.
+   *
+   *  Called when user clicks "Save"
+  */
   async function uploadNewImage(evt) {
     evt.preventDefault();
     console.log("data sent to server", fileData);
@@ -62,11 +69,15 @@ function EditImageForm({ jpg, updateImagesState }) {
     navigate(`/images/${data.id}`);
   }
 
+  //HTML for a new Image
   const newImagePreview = (
-    <ImagePreview
-      file={jpg}
-      handleSave={uploadNewImage}
-    />
+    jpg ?
+      <ImagePreview
+        file={jpg}
+        handleSave={uploadNewImage}
+      />
+    :
+      <Navigate to="/"/>
   );
 
   return (

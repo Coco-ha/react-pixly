@@ -18,7 +18,7 @@ function ImagesList({ images }) {
     <div className="ImagesList">
       {images.map(image => {
         return (
-          <div className="ImagesList-item">
+          <div className="ImagesList-item" key={image.id}>
             <Link to={`/images/${image.id}`} key={image.id}>
               <ImageCard image={image} key={image.id} />
             </Link>

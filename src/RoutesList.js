@@ -1,7 +1,5 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import AddImageForm from "./AddImageForm";
 import Home from "./Home";
-import ImagesList from "./ImagesList";
 import ImageDetails from "./ImageDetails";
 import EditImageForm from "./EditImageForm";
 import NewImageForm from "./NewImageForm";
@@ -15,7 +13,7 @@ import NewImageForm from "./NewImageForm";
  *
  * State: None
  *
- * App -> RoutesList -> Home/NewImageForm/ImageDetail/EditImageForm
+ * App -> RoutesList -> {Home, NewImageForm, ImageDetail, EditImageForm}
  */
 function RoutesList({images, addImage, jpg, updateJpg}){
 
@@ -25,6 +23,7 @@ function RoutesList({images, addImage, jpg, updateJpg}){
       <Route path="/add" element={<NewImageForm updateJpg={updateJpg}/>} />
       <Route path="/images/:id" element={<ImageDetails images={images}/>} />
       <Route path="/new/preview" element={<EditImageForm jpg={jpg} updateImagesState={addImage}/>} />
+      <Route path="/*" element={<Navigate to="/"/>} />
     </Routes>
   )
 

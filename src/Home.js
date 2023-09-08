@@ -7,7 +7,7 @@ import ImagesList from "./ImagesList"
  *
  * State:None
  *
- * App -> Home -> ImageList
+ * App -> Home -> ImagesList
  */
 function Home({images}){
   return (

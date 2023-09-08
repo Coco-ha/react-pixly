@@ -20,15 +20,7 @@ function ImagePreview({ file, handleSave }) {
 
   console.log("rendering Image Preview")
   console.log("preview file:",file)
-  // const [isLoading, setIsLoading] = useState(true);
 
-
-  // function handleLoad(evt) {
-  //   if (isLoading) {
-  //     const dataFromImage = getMetaData(evt.target, getMetaData);
-  //     setIsLoading(false);
-  //   }
-  // }
 
   return (
     <div className='ImagePreview'>
@@ -39,6 +31,7 @@ function ImagePreview({ file, handleSave }) {
             {file.name}
           </div>
         </div>
+        
       </div>
 
       <img

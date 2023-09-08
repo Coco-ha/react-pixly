@@ -1,6 +1,4 @@
 import EXIF from 'exif-js';
-import { v4 as uuidv4 } from "uuid";
-
 
 
 /** Pulls relevant metadata from an image on load

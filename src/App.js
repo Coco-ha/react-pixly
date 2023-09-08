@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import getMetaData from './image_helpers';
-import { uploadImage, getAllImages } from './api';
-import AddImageForm from './AddImageForm';
+import { getAllImages } from './api';
 import { BrowserRouter } from 'react-router-dom';
 import RoutesList from './RoutesList';
 import NavBar from './NavBar';
@@ -27,7 +25,7 @@ function App() {
 
   const[isLoading, setIsLoading] = useState(true)
   const [images, setImages] = useState([]);
-  const [currentJpg, setCurrentJpg] = useState([])
+  const [currentJpg, setCurrentJpg] = useState()
 
   console.log("App rendered. Images:", images);
 
@@ -35,20 +33,21 @@ function App() {
   useEffect(function fetchAllImagesOnMount() {
     async function fetchAllImages() {
       const response = await getAllImages();
-      setImages(() => [...images, ...response.images]);
+      setImages(() => [...response.images]);
       setIsLoading(false)
     }
 
     fetchAllImages();
   }, []);
 
-  /** function to update the state of currentJpg */
+
+  /** sets the image stored in currentJpg */
   function updateJpg(file){
     setCurrentJpg(file)
   }
 
 
-/** function that updates the state with new image */
+/** adds an image to images */
   function addImage(image){
     setImages(()=>[image,...images])
   }
@@ -61,7 +60,7 @@ function App() {
           <h3> is Loading...</h3>
           :
           <BrowserRouter>
-            <NavBar/>
+            <NavBar updateJpg={updateJpg}/>
             <RoutesList
               images={images}
               addImage={addImage}

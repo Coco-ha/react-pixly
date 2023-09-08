@@ -1,6 +1,5 @@
 import ImageCard from "./ImageCard";
 import { useParams } from "react-router-dom";
-import { getImageById } from "./api";
 
 /** Pulls an image from the list of images based on the url param and renders
  * an ImageCard containing that image

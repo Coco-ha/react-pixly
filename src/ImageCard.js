@@ -1,4 +1,3 @@
-import Image from "./Image";
 import "./ImageCard.css";
 
 /** Renders a single image
@@ -27,7 +26,7 @@ function ImageCard({ image }) {
         <button>Greyscale</button>
 
       </div>
-      <img src={image.url} />
+      <img src={image.url} alt={image.name} />
     </div>
   );
 }

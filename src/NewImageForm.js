@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./AddImageForm.css";
+import "./NewImageForm.css";
 
 /**  Renders a form that allows a user to add an image to pixly:
  *
@@ -46,8 +46,9 @@ function NewImageForm({ updateJpg, updateImagesState }) {
   */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    updateJpg(file)
-    navigate("/new/preview")
+    updateJpg(file);
+    setImageInput("");
+    navigate("/new/preview");
   }
 
   return (
@@ -60,7 +61,7 @@ function NewImageForm({ updateJpg, updateImagesState }) {
           name="image"
           className="AddImageForm-imageInput"
           onChange={handleChange}
-          />
+        />
         <button className="AddImageForm-button" type="submit">Submit</button>
       </form>
     </div>
