@@ -12,6 +12,8 @@ function App() {
 
   const[isLoading, setIsLoading] = useState(true)
   const [images, setImages] = useState([]);
+  const [currentJpg, setCurrentJpg] = useState([])
+
   console.log("App rendered. Images:", images);
 
   //Get images on mount
@@ -25,13 +27,17 @@ function App() {
     fetchAllImages();
   }, []);
 
-  //Pushes a new image into the images array
-  function addImage(newImage) {
-    function addNewImage() {
-      setImages([...images, newImage]);
-    }
-    addNewImage();
+  function updateJpg(file){
+    setCurrentJpg(file)
   }
+
+  //Pushes a new image into the images array
+  // function addImage(newImage) {
+  //   function addNewImage() {
+  //     setImages([...images, newImage]);
+  //   }
+  //   addNewImage();
+  // }
 
   function addImage(image){
     setImages(()=>[image,...images])
@@ -47,7 +53,11 @@ function App() {
           :
           <BrowserRouter>
             <NavBar/>
-            <RoutesList images={images} addImage={addImage}/>
+            <RoutesList
+              images={images}
+              addImage={addImage}
+              jpg={currentJpg}
+              updateJpg={updateJpg}/>
             {/* <AddImageForm addImage={addImage} /> */}
           </BrowserRouter>
         }

@@ -1,16 +1,49 @@
-.ImagePreview {
-    width:fit-content;
+.ImageCard {
+    /* width:100%; */
+    /* max-width: 40%; */
     background-color: var(--highlight-color);
 
     border-radius: 5px;
-
     padding: 1em;
-    margin:1em;
     margin-left:auto;
     margin-right:auto;
+    display:flex;
+    flex-direction: column;
 }
 
+
 .ImageCard img {
-    max-height: 80vh;
-    object-fit:cover
+    height: 40vh;
+    width: 25vw;
+    object-fit:cover;
+    margin-top:.5em;
+}
+
+.ImageCard-header {
+    background-color: var(--highlight-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.ImageCard-header button {
+
+}
+
+.ImageCard-titleBorder {
+    background-color: red;
+    background-image: linear-gradient(var(--accent-color), var(--accent-color2));
+    border-radius: 10px;
+    display: inline-block;
+    padding: 1px;
+    /* opacity: 50%; */
+}
+
+.ImageCard-title {
+    background-color: var(--highlight-color);
+    /* background-image: linear-gradient(var(--accent-color), var(--accent-color2)); */
+    border-radius: 10px;
+    display: inline-block;
+
+    border-width:10px;
+    padding: 6px 10px;
 }

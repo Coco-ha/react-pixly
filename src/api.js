@@ -28,14 +28,16 @@ const BASE_API_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5001";
  *    url,
  *  }
  */
-async function uploadImage(data) {
+async function uploadImage(file, data) {
   console.log("data>>>>>>>", data);
+  console.log("file>>>>>>>", file);
+
 
   //set up request object with correct data
   const formData = new FormData();
 
-  formData.set("file", data.file);
-  formData.set("file_name", data.file.name);
+  formData.set("file", file);
+  formData.set("file_name", file.name);
   if (data.date) formData.set("date", data.date);
   if (data.pixelXDimension) formData.set("pixelXDimension", data.pixelXDimension);
   if (data.pixelYDimension) formData.set("pixelYDimension", data.pixelYDimension);

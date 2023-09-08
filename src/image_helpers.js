@@ -8,10 +8,10 @@ import Jimp from "jimp";
  * Returns {Date, PixelXDimension,PixelYDimension, Make, Model}
  */
 
-function getMetaData(fileInput, onResolved) {
-  console.log("running getMetaData with", fileInput);
+function getMetaData(imgElement, onSuccess) {
+  console.log("running getMetaData with", imgElement);
 
-  EXIF.getData(fileInput, function () {
+  EXIF.getData(imgElement, function () {
     console.log("inside exif get data");
     const specificMetaData = {
       date: EXIF.getTag(this, "Date"),
@@ -22,7 +22,7 @@ function getMetaData(fileInput, onResolved) {
     };
 
     console.log("specificmetadata>>>>", specificMetaData);
-    onResolved(specificMetaData);
+    onSuccess(specificMetaData);
   });
 }
 

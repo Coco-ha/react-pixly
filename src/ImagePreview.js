@@ -3,46 +3,50 @@ import {getMetaData} from './image_helpers';
 import { uploadImage } from './api';
 import "./ImagePreview.css";
 
-/** Previews changes to an image and renders a form for adding/updating a record
+
+
+/** Previews an image and renders a button to save data and/or changes
  *
- * Props:
- *  Mode - "add" or "edit"
+ *  jpg - image file to edit
+ *  handleSave - callback for saving changes in state & db
  */
-function ImagePreview({ imageFile, handleSave, mode }) {
 
+function ImagePreview({ file, handleSave }) {
 
-  /** ADD mode
-   *
-   *  load an image
-   *    pull metadata from that image on load
-   *    display that image on load
-   *  render image preview
-   */
-
+  console.log("rendering Image Preview")
+  console.log("preview file:",file)
   // const [isLoading, setIsLoading] = useState(true);
 
 
   // function handleLoad(evt) {
   //   if (isLoading) {
-  //     const dataFromImage = getMetaData(evt.target, updateMetadata);
+  //     const dataFromImage = getMetaData(evt.target, getMetaData);
   //     setIsLoading(false);
   //   }
   // }
 
   return (
-    <div className='EditImageForm'>
-      {/* <img
+    <div className='ImagePreview'>
+      <div className="ImagePreview-header">
+
+        <div className="ImagePreview-titleBorder">
+          <div className="ImagePreview-title">
+            {file.name}
+          </div>
+        </div>
+      </div>
+
+      <img
         src={URL.createObjectURL(file)}
         alt={file.name}
-        className="EditImageForm-image"
-        onLoad={handleLoad} />
-      <form onSubmit={save}>
+        className="ImagePreview-image"
+        onLoad={()=>console.log("loaded")}
+        />
+      <form onSubmit={handleSave}>
         <button type="submit">Save</button>
-      </form> */}
+      </form>
     </div>
   );
-
-
 
 }
 

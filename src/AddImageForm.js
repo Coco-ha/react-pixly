@@ -104,7 +104,7 @@ function AddImageForm({ addImage }) {
         <ImagePreview
           updateMetadata={updateMetadata}
           file={fileData.file}
-          save={handleUpload} />
+          handleSave={handleUpload} />
       }
     </div>
   );

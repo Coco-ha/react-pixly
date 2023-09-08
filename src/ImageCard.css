@@ -1,6 +1,7 @@
-.ImageCard {
+.ImagePreview {
     /* width:100%; */
     /* max-width: 40%; */
+    width: fit-content;
     background-color: var(--highlight-color);
 
     border-radius: 5px;
@@ -9,29 +10,29 @@
     margin-right:auto;
     display:flex;
     flex-direction: column;
+
+    margin-top: 1em
 }
 
 
-
-.ImageCard img {
-    height: 40vh;
-    width: 25vw;
+.ImagePreview img {
+    height: 80vh;
+    width: 80vw;
     object-fit:cover;
     margin-top:.5em;
 }
 
-.ImageCard-header {
+.ImagePreview-header {
     background-color: var(--highlight-color);
     display: flex;
     justify-content: space-between;
 }
 
-.ImageCard-header button {
-    
+.ImagePreview button {
+    margin: 1em;
 }
 
-.ImageCard-titleBorder {
-    background-color: red;
+.ImagePreview-titleBorder {
     background-image: linear-gradient(var(--accent-color), var(--accent-color2));
     border-radius: 10px;
     display: inline-block;
@@ -39,7 +40,7 @@
     /* opacity: 50%; */
 }
 
-.ImageCard-title {
+.ImagePreview-title {
     background-color: var(--highlight-color);
     /* background-image: linear-gradient(var(--accent-color), var(--accent-color2)); */
     border-radius: 10px;
