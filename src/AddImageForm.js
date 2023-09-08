@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import getMetaData from './image_helpers';
+import {getMetaData} from './image_helpers';
 import { uploadImage } from './api';
 import ImagePreview from './ImagePreview';
 import { useNavigate } from 'react-router-dom';
-import "./AddImageForm.css"
+import "./AddImageForm.css";
 
 /**  Renders a form that allows a user to add an image to pixly:
  *
@@ -28,10 +28,9 @@ function AddImageForm({ addImage }) {
   /** Handles form controls */
   function handleChange(evt) {
     const fileName = evt.target.files[0].name;
-    // console.log("targetfile>>>",evt.target.files[0])
-    // console.log("fileName>>>>>",fileName)
-    const splitFileName = fileName.toLowerCase().split(".")
-    const extension = splitFileName[splitFileName.length-1]
+
+    const splitFileName = fileName.toLowerCase().split(".");
+    const extension = splitFileName[splitFileName.length - 1];
 
     if (extension === "jpg") {
       setImageInput(evt.target.value);
@@ -39,11 +38,12 @@ function AddImageForm({ addImage }) {
       setFileData(() => {
         return { ...fileData, file: evt.target.files[0] };
       });
-    }else{
-      alert("This is not a JPG")
-      setImageInput("")
+    } else {
+      alert("This is not a JPG");
+      setImageInput("");
     }
   }
+
 
   /** Accesses the file from the form input and updates fileData state.
    * Advances to preview mode.
@@ -51,8 +51,8 @@ function AddImageForm({ addImage }) {
   async function goPreviewMode(evt) {
     evt.preventDefault();
     setMode("preview");
-
   }
+
 
   /** Updates the fileData state with metadata from an image.  Used as
    * a callback
@@ -65,7 +65,6 @@ function AddImageForm({ addImage }) {
         ...data,
       };
     });
-
   }
 
   /** Makes an api request for uploading an image */
@@ -76,9 +75,11 @@ function AddImageForm({ addImage }) {
     console.log("fileDATA>>>>", fileData);
     //create id
     //add id to fileData
-    await uploadImage(fileData);
-    addImage(fileData)
-    navigate(`/images/${fileData.id}`)
+    const data = await uploadImage(fileData);
+    console.log("data in handleUpdate",data)
+    addImage(data);
+
+    navigate(`/images/${data.id}`);
     //TODO: redirect somewhere
 
   }

@@ -8,7 +8,7 @@ import { getImageById } from "./api";
 
 function ImageDetails({images}){
 
-  console.log("Rendering image card. Images>>>>", images);
+  console.log("Rendering imageDetails. Images>>>>", images);
   const { id } = useParams();
   console.log("id>>>>>>", id);
   const image = images.find(image => image.id === id);

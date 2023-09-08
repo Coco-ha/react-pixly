@@ -1,0 +1,16 @@
+.ImagesList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap:wrap;
+    justify-content: center;
+
+    max-width: 100%;
+}
+
+.ImagesList-item {
+    max-width: 40%;
+}
+.ImagesList .ImageCard {
+    margin:.5em;
+}

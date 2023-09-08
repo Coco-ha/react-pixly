@@ -1,20 +1,29 @@
 :root{
   --highlight-color: #222222;
   --accent-color: rgb(255, 68, 68);
+  --accent-color2: rgb(241, 78, 57);
   --dark-color: #0c0c0c;
 }
 
-Body *{
+Body{
   margin:0px;
   padding:0px;
   box-sizing: border-box;
+  background-color: var(--dark-color);
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .App {
-  padding:2em;
   text-align: center;
-  background-color: var(--dark-color);
-  color: white;
   height: 100vh;
   width:100%;
 }
@@ -22,3 +31,14 @@ Body *{
 h3 {
   padding-top: 2em;
 }
+
+button {
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 10px;
+  padding:.5em 1em;
+  color:white;
+  font-weight: bolder;
+}
+
+

@@ -1,5 +1,6 @@
 import ImageCard from "./ImageCard";
 import { Link } from "react-router-dom";
+import "./ImagesList.css";
 
 function ImagesList({ images }) {
   console.log("Images list rendered with images>>>", images);
@@ -8,10 +9,12 @@ function ImagesList({ images }) {
     <div className="ImagesList">
       {images.map(image => {
         return (
-          <Link to={`/images/${image.id}`}>
-            <ImageCard image={image} />;
-          </Link>
-        );
+          <div className="ImagesList-item">
+            <Link to={`/images/${image.id}`} key={image.id}>
+              <ImageCard image={image} key={image.id} />
+            </Link>
+          </div>
+        )
       })}
     </div>
   );
