@@ -1,6 +1,8 @@
 import { NavLink, Link } from "react-router-dom";
 import "./NavBar.css";
 
+/** Navigation component renders link to Pixly home and add image form*/
+
 function NavBar(){
 
   return (

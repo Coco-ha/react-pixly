@@ -1,13 +1,18 @@
 import Image from "./Image";
 import "./ImageCard.css";
-import { convertToGrayscale } from "./image_helpers";
-import { useState } from "react";
-import Jimp from "jimp";
 
+/** Renders a single image
+ *
+ * Props:
+ *  image: a single image object
+ *  {date,file_name,id,make,model,pixel_x_dimension,pixel_y_dimension, url}
+ *
+ * State: None
+ *
+ *ImageDetails -> ImageCard
+ */
 function ImageCard({ image }) {
   console.log("image in imageCARDDDD>>>", image)
-  // const [jimpImage,setJimpImage] = useState(image.url)
-
 
   return (
     <div className="ImageCard">

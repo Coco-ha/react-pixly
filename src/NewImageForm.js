@@ -4,14 +4,17 @@ import "./AddImageForm.css";
 
 /**  Renders a form that allows a user to add an image to pixly:
  *
- * STATE:
- *  fileData: the user file and associated metadata
- *            {file, Date, PixelXDimension,PixelYDimension, Make, Model}
- *  imageInput: form control for the file input
- *  mode: one of "select", "preview" or "complete"
- *
  * PROPS:
  *  addImage: callback function for updating app state
+ *
+ * STATE:
+ *  file: the user file and associated metadata
+ *            {file, Date, PixelXDimension,PixelYDimension, Make, Model}
+ *
+ *  imageInput: form control for the file input
+ *
+ * RouteList -> NewImageForm
+ *
 */
 function NewImageForm({ updateJpg, updateImagesState }) {
 
@@ -25,7 +28,6 @@ function NewImageForm({ updateJpg, updateImagesState }) {
   function handleChange(evt) {
     const fileName = evt.target.files[0].name;
 
-    //check extension
     const splitFileName = fileName.toLowerCase().split(".");
     const extension = splitFileName[splitFileName.length - 1];
 
@@ -47,8 +49,6 @@ function NewImageForm({ updateJpg, updateImagesState }) {
     updateJpg(file)
     navigate("/new/preview")
   }
-
-
 
   return (
     <div className='AddImageForm'>

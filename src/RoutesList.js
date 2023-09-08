@@ -6,6 +6,17 @@ import ImageDetails from "./ImageDetails";
 import EditImageForm from "./EditImageForm";
 import NewImageForm from "./NewImageForm";
 
+/** Route List
+ *
+ * Props: images (a list of image, passed down from App)
+ *        addImage : function that updates our state with new images
+ *        jpg : the current image that is being previewed
+ *        updateJpg : function that update our preview image state
+ *
+ * State: None
+ *
+ * App -> RoutesList -> Home/NewImageForm/ImageDetail/EditImageForm
+ */
 function RoutesList({images, addImage, jpg, updateJpg}){
 
   return(

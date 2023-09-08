@@ -4,6 +4,14 @@ import { getImageById } from "./api";
 
 /** Pulls an image from the list of images based on the url param and renders
  * an ImageCard containing that image
+ *
+ * Props:
+ * - images: a list of images
+ *    [{img1}, {img2}, {...}]
+ *
+ * State:None
+ *
+ *
  */
 
 function ImageDetails({images}){

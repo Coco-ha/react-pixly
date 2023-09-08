@@ -7,8 +7,13 @@ import "./ImagePreview.css";
 
 /** Previews an image and renders a button to save data and/or changes
  *
+ * Props:
  *  jpg - image file to edit
  *  handleSave - callback for saving changes in state & db
+ *
+ * State: None
+ *
+ * EditImageForm -> ImagePreview
  */
 
 function ImagePreview({ file, handleSave }) {

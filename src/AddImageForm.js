@@ -16,98 +16,98 @@ import "./AddImageForm.css";
  * PROPS:
  *  addImage: callback function for updating app state
 */
-function AddImageForm({ addImage }) {
+// function AddImageForm({ addImage }) {
 
-  const [fileData, setFileData] = useState({});
-  const [imageInput, setImageInput] = useState("");
-  const [mode, setMode] = useState("select");
-  const navigate = useNavigate();
+//   const [fileData, setFileData] = useState({});
+//   const [imageInput, setImageInput] = useState("");
+//   const [mode, setMode] = useState("select");
+//   const navigate = useNavigate();
 
-  console.log("rendering addImageForm with:", fileData);
+//   console.log("rendering addImageForm with:", fileData);
 
-  /** Handles form controls */
-  function handleChange(evt) {
-    const fileName = evt.target.files[0].name;
+//   /** Handles form controls */
+//   function handleChange(evt) {
+//     const fileName = evt.target.files[0].name;
 
-    const splitFileName = fileName.toLowerCase().split(".");
-    const extension = splitFileName[splitFileName.length - 1];
+//     const splitFileName = fileName.toLowerCase().split(".");
+//     const extension = splitFileName[splitFileName.length - 1];
 
-    if (extension === "jpg") {
-      setImageInput(evt.target.value);
+//     if (extension === "jpg") {
+//       setImageInput(evt.target.value);
 
-      setFileData(() => {
-        return { ...fileData, file: evt.target.files[0] };
-      });
-    } else {
-      alert("This is not a JPG");
-      setImageInput("");
-    }
-  }
-
-
-  /** Accesses the file from the form input and updates fileData state.
-   * Advances to preview mode.
-  */
-  async function goPreviewMode(evt) {
-    evt.preventDefault();
-    setMode("preview");
-  }
+//       setFileData(() => {
+//         return { ...fileData, file: evt.target.files[0] };
+//       });
+//     } else {
+//       alert("This is not a JPG");
+//       setImageInput("");
+//     }
+//   }
 
 
-  /** Updates the fileData state with metadata from an image.  Used as
-   * a callback
-   */
-  function updateMetadata(data) {
-    console.log("passed data to updateMetadata", data);
-    setFileData(() => {
-      return {
-        ...fileData,
-        ...data,
-      };
-    });
-  }
-
-  /** Makes an api request for uploading an image */
-  async function handleUpload(evt) {
-    evt.preventDefault();
-
-    console.log("running handle upload");
-    console.log("fileDATA>>>>", fileData);
-    //create id
-    //add id to fileData
-    const data = await uploadImage(fileData);
-    console.log("data in handleUpdate",data)
-    addImage(data);
-
-    navigate(`/images/${data.id}`);
-    //TODO: redirect somewhere
-
-  }
+//   /** Accesses the file from the form input and updates fileData state.
+//    * Advances to preview mode.
+//   */
+//   async function goPreviewMode(evt) {
+//     evt.preventDefault();
+//     setMode("preview");
+//   }
 
 
-  return (
-    <div className='AddImageForm'>
-      {mode === "select"
-        ?
-        <form onSubmit={goPreviewMode}>
-          <label htmlFor='image'></label>
-          <input
-            value={imageInput}
-            type="file"
-            name="image"
-            className="AddImageForm-imageInput"
-            onChange={handleChange}
-          />
-          <button className="AddImageForm-button" type="submit">Submit</button>
-        </form>
-        :
-        <ImagePreview
-          updateMetadata={updateMetadata}
-          file={fileData.file}
-          handleSave={handleUpload} />
-      }
-    </div>
-  );
-}
+//   /** Updates the fileData state with metadata from an image.  Used as
+//    * a callback
+//    */
+//   function updateMetadata(data) {
+//     console.log("passed data to updateMetadata", data);
+//     setFileData(() => {
+//       return {
+//         ...fileData,
+//         ...data,
+//       };
+//     });
+//   }
 
-export default AddImageForm;
+//   /** Makes an api request for uploading an image */
+//   async function handleUpload(evt) {
+//     evt.preventDefault();
+
+//     console.log("running handle upload");
+//     console.log("fileDATA>>>>", fileData);
+//     //create id
+//     //add id to fileData
+//     const data = await uploadImage(fileData);
+//     console.log("data in handleUpdate",data)
+//     addImage(data);
+
+//     navigate(`/images/${data.id}`);
+//     //TODO: redirect somewhere
+
+//   }
+
+
+//   return (
+//     <div className='AddImageForm'>
+//       {mode === "select"
+//         ?
+//         <form onSubmit={goPreviewMode}>
+//           <label htmlFor='image'></label>
+//           <input
+//             value={imageInput}
+//             type="file"
+//             name="image"
+//             className="AddImageForm-imageInput"
+//             onChange={handleChange}
+//           />
+//           <button className="AddImageForm-button" type="submit">Submit</button>
+//         </form>
+//         :
+//         <ImagePreview
+//           updateMetadata={updateMetadata}
+//           file={fileData.file}
+//           handleSave={handleUpload} />
+//       }
+//     </div>
+//   );
+// }
+
+// export default AddImageForm;

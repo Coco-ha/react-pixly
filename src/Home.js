@@ -1,5 +1,14 @@
 import ImagesList from "./ImagesList"
 
+/** Home component which renders the home screen that shows a list of images
+ *
+ * Props:
+ *  images: a list of images
+ *
+ * State:None
+ *
+ * App -> Home -> ImageList
+ */
 function Home({images}){
   return (
     <div className="Home">

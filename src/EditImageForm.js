@@ -6,6 +6,18 @@ import ImagePreview from './ImagePreview';
 
 /** Responsible for holding data about an image
  * Renders a preview component
+ *
+ * Props:
+ *  -jpg : JPG file
+ *  -updateImagesState: function that updates the image state
+ *
+ * State:
+ * isLoading: boolean to indicate if the image is done loading
+ * fileData: metaData from the image
+ *    {file, date, file_name ,make,model, pixel_x_dimension, pixel_y_dimension}
+ *
+ *
+ * RouteList -> EditImageForm
  */
 function EditImageForm({ jpg, updateImagesState }) {
 
@@ -25,11 +37,10 @@ function EditImageForm({ jpg, updateImagesState }) {
 
     console.log("image element:", img);
     img.onload= () => {
-        if (isLoading) { //TODO: why does this work here?
+        if (isLoading) {
           function updateFileData(data) {
             setFileData(data)
           };
-          // debugger;
 
           getMetaData(img, updateFileData)
           setIsLoading(false)
@@ -37,27 +48,7 @@ function EditImageForm({ jpg, updateImagesState }) {
 
     }
 
-    // setImageElement(img);
-
   }, [isLoading]);
-
-  // useEffect(function pullMetaDataOnLoad() {
-  //   if (!isLoading) {
-
-  //     console.log("useEffect pulling metadata. isLoading:", isLoading);
-
-  //     const img = document.querySelector("img");
-  //     if (!img) throw new Error("no image element found");
-
-  //     function updateFileData(data) {
-  //       setFileData(data)
-  //     };
-  //     getMetaData(img, updateFileData);
-  //   }
-
-  // }, [isLoading]);
-
-
 
   /** Makes an api request for uploading an image */
   async function uploadNewImage(evt) {

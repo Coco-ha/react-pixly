@@ -7,7 +7,22 @@ import RoutesList from './RoutesList';
 import NavBar from './NavBar';
 import "./App.css"
 
-// Renders the app
+/**Main Application component with routers
+ *
+ * Props: None
+ *
+ * State:
+ * - isLoading: boolean that indicates if the image is finished loading
+ *
+ * - images: A list of images
+ *      [ {image1}, {image2}, {..}]
+ *
+ * - currentJpg: the current image that is being previewed
+ *      {date,file_name,id,make,model,pixel_x_dimension,pixel_y_dimension, url}
+ *
+ * App -> Homepage
+ *
+ */
 function App() {
 
   const[isLoading, setIsLoading] = useState(true)
@@ -16,7 +31,7 @@ function App() {
 
   console.log("App rendered. Images:", images);
 
-  //Get images on mount
+  /** Fetches data from API and updates the state on mount with image info. */
   useEffect(function fetchAllImagesOnMount() {
     async function fetchAllImages() {
       const response = await getAllImages();
@@ -27,23 +42,17 @@ function App() {
     fetchAllImages();
   }, []);
 
+  /** function to update the state of currentJpg */
   function updateJpg(file){
     setCurrentJpg(file)
   }
 
-  //Pushes a new image into the images array
-  // function addImage(newImage) {
-  //   function addNewImage() {
-  //     setImages([...images, newImage]);
-  //   }
-  //   addNewImage();
-  // }
 
+/** function that updates the state with new image */
   function addImage(image){
     setImages(()=>[image,...images])
   }
-
-
+  console.log("IMAGES>", images)
   return (
     <section className='App'>
       <div className='App-container'>
@@ -58,7 +67,7 @@ function App() {
               addImage={addImage}
               jpg={currentJpg}
               updateJpg={updateJpg}/>
-            {/* <AddImageForm addImage={addImage} /> */}
+
           </BrowserRouter>
         }
 
